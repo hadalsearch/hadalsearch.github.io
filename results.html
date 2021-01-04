@@ -155,7 +155,7 @@
     <p> 
         <label><input type="radio" name="filter" id="default-filter" value="default">#NoFilter</label>
         <label><input type="radio" name="filter" id="nonews-filter" value="nonews">No News</label>
-        <label><input type="radio" name="filter" value="nosocial-filter">No Social Media</label>
+        <label><input type="radio" name="filter" id="nosocial-filter" value="nosocial">No Social Media</label>
 
         <label><input type="radio" name="filter" id="founder-filter" value="founder">Founder's Filter</label> <br>
 
@@ -221,6 +221,7 @@
             let params = new URLSearchParams(document.location.search.substring(1));
             let filter = params.get("filter")
             let searchQuery = params.get("searchq")
+            console.log(searchQuery)
                                     
             if (filter === null) {
                 filter = "default"
