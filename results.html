@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HADAL Search Results: </title>
+    
+<!--    CSS-->
+    <style>
+        * {
+            color: #F8F8F8;
+        }
+        
+        body {
+            background-color:#33323b;
+            font-family:Arial;
+        }
+        
+        .search-input {
+            width: 400px;
+            color: #000000;
+        }
+        
+        .result-container {
+            width: 65%;
+            border-style: solid;
+            border-width: thin;
+            border-color: rgba(255, 255, 255, .3);
+            padding: 6px;
+            margin: 12px;
+            margin-left: auto;
+            margin-right: auto;
+            word-wrap: break-word;
+        }
+        
+        .ad-container {
+            width: 65%;
+            border-style: solid;
+            border-width: thin;
+            border-color: rgba(255,255, 255,.3);
+            background-color: rgba(50 ,255,  200,.05);
+            padding: 6px;
+            margin: 12px;
+            margin-left: auto;
+            margin-right: auto;
+            word-wrap: break-word;
+        }
+
+        
+        .load-more {
+            width: 65%;
+            padding: 6px;
+            margin: 12px;
+            margin-left: auto;
+            margin-right: auto;
+            word-wrap: break-word;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .search-suggestion {
+            width: 65%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .link-name {
+            font-size: 18px;
+        }
+        
+        .link-url {
+            color: #70dbbf;
+            font-size: 12px;
+            margin-top: 0px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .link-snippet {
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        
+        
+        .lds-circle {
+            display: flex;
+            justify-content: center;
+            transform: translateZ(1px);
+            margin-top: 50px;
+        }
+        .lds-circle > div {
+            display: inline-block;
+            width: 64px;
+            height: 64px;
+            margin: 8px;
+            border-radius: 50%;
+            background: #fff;
+            animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+        }
+        @keyframes lds-circle {
+            0%, 100% {
+                animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
+            }
+            0% {
+                transform: rotateY(0deg);
+            }
+            50% {
+                transform: rotateY(1800deg);
+                animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
+            }
+            100% {
+                transform: rotateY(3600deg);
+            }
+        }
+
+        .arrow {
+          border: solid #F8F8F8;
+          border-width: 0 3px 3px 0;
+          display: inline-block;
+          padding: 3px;
+        }
+
+        .right {
+          transform: rotate(-45deg);
+          -webkit-transform: rotate(-45deg);
+        }
+
+        .left {
+          transform: rotate(135deg);
+          -webkit-transform: rotate(135deg);
+        }
+
+        .up {
+          transform: rotate(-135deg);
+          -webkit-transform: rotate(-135deg);
+        }
+
+        .down {
+          transform: rotate(45deg);
+          -webkit-transform: rotate(45deg);
+        }
+
+    </style>
+    
+</head>
+    
+<body>
+
+    
+<div class="wrapper" align="center"> 
+    <form action="/results.html">
+    <a href="index.html" style="text-decoration: none; color:#F8F8F8">HADAL &nbsp| &nbsp</a>
+    <input id="search-input" type="text" id="searchq" class="search-input" name="searchq" maxlength="1000" required autocomplete="off">        
+    <input type="submit" style="color: #000000" value="Search">
+    <a href="about.html" style="text-decoration: none; color:#F8F8F8">&nbsp |&nbsp About</a> 
+    <p> 
+        <label><input type="radio" name="filter" id="default-filter" value="default">#NoFilter</label>
+        <label><input type="radio" name="filter" id="nonews-filter" value="nonews">No News Sites</label>
+        <label><input type="radio" name="filter" id="founder-filter" value="founder">Founder's Filter</label> <br>
+
+    </p>
+    </form>
+</div>    
+    
+<!--    Use this with CSS/JS below  to show suggested search-->
+    <div id="search-suggestion"></div>
+    
+    
+    <div class="ad-container">
+        <a href="baananas.com" class="link-name">Title of the Ad</a>
+        <a class="link-url" href="${result.url}">http://www.aadvertisement-website.com/whatever/this-might/be.html</a>
+        <p class="link-snippet">This is where the text of the advertisement will go. I hope it isn't too annoying and doesn't deter you from usingn HADAL Search. </p>
+    </div>
+    
+    <div id="results">
+    </div>
+    
+    <div id="load-circle" class="lds-circle"><div></div></div>
+    
+    <div id="loadMore" class="load-more"> <button type="button" id="loadMoreButton" style="color: #000000">Load More</button>
+    </div>
+    
+    
+    
+    
+    <script>
+        
+        const $results = document.getElementById('results')
+        const $autoCorrect = document.getElementById('search-suggestion')
+        
+        const $loadCircle = document.getElementById("load-circle")
+        const $loadMore = document.getElementById("loadMore")
+        const $textInput = document.getElementById("search-input")
+        
+        let pageNumber = 0
+        
+        function showLoadCircle(show) {
+            $loadCircle.style.display = show ? 'flex' : 'none'
+        }
+        
+        function showLoadMore(show) {
+            $loadMore.style.display = show ? 'flex' : 'none'
+        }
+        
+        
+        async function searchRequest(searchQuery, filter, pageNumber) {
+            const response = await fetch(`http://127.0.0.1:5000/searchRequest?searchq=${searchQuery}&filter=${filter}&pagenum=${pageNumber}`)
+            const json = await response.json()
+            return json
+        }
+        
+        
+        
+//        JS Event on Page Load
+        window.addEventListener('load', async (event) => {
+            console.log('page is fully loaded')
+            
+            showLoadMore(false)
+            
+            let params = new URLSearchParams(document.location.search.substring(1));
+            let filter = params.get("filter")
+            let searchQuery = params.get("searchq")
+                                    
+            if (filter === null) {
+                filter = "default"
+            }
+            
+            document.getElementById(filter+'-filter').checked = true;
+            $textInput.value = searchQuery
+            
+            if (searchQuery === null) {
+                showLoadCircle(false)
+                return
+            }
+
+            const hadalResults = await searchRequest(searchQuery, filter, pageNumber)
+            console.log(hadalResults)
+            
+            
+//            if (hadalResults.spellingSuggestion != null && 
+//               hadalResults.spellingAutoSuggest == null) {
+//                suggestedUrl = `/results.html?searchq=${hadalResults.spellingSuggestion}&filter=${filter}`
+//                
+//                $autoCorrect.innerHTML +=  `<p>Did you mean: <a href="${suggestedUrl}">${hadalResults.spellingSuggestion}</a></p>`
+//            }
+            
+            if (hadalResults.spellingAutoSuggest != null) {
+                suggestedUrl = `/results.html?searchq=${encodeURIComponent(hadalResults.alterationOverride)}&filter=${filter}`
+                $autoCorrect.innerHTML +=  `<p>Including results for: ${hadalResults.spellingSuggestHTML}</p>`
+                
+            }
+
+            
+            
+//            when you request next page, set this to true
+            showLoadCircle(false)
+            
+            hadalResults.results.forEach((result) => {
+            $results.innerHTML += `
+                <div class="result-container">
+                    <a href="${result.url}" class="link-name">${result.name}</a>
+                    <a class="link-url" href="${result.url}">${result.url}</a>
+                    <p class="link-snippet">${result.snippet}</p>
+                </div>
+            `
+            })
+            
+            showLoadMore(true)
+            
+            
+            
+            
+
+            
+        });
+        
+        
+//        JS Event on "Show More"
+        document.getElementById("loadMoreButton").addEventListener('click', async (event) => {
+            showLoadCircle(true)
+            showLoadMore(false)
+            
+            pageNumber += 1
+            console.log(pageNumber)
+            
+            let params = new URLSearchParams(document.location.search.substring(1));
+            let filter = params.get("filter")
+            let searchQuery = params.get("searchq")
+                                    
+            if (filter === null) {
+                filter = "default"
+            }
+            
+            document.getElementById(filter+'-filter').checked = true;
+            $textInput.value = searchQuery
+            
+            if (searchQuery === null) {
+                showLoadCircle(false)
+                return
+            }
+
+            const hadalResults = await searchRequest(searchQuery, filter, pageNumber)
+            console.log(hadalResults)
+            
+//            when you request next page, set this to true
+            showLoadCircle(false)
+            
+            hadalResults.results.forEach((result) => {
+            $results.innerHTML += `
+                <div class="result-container">
+                    <a href="${result.url}" class="link-name">${result.name}</a>
+                    <a class="link-url" href="${result.url}">${result.url}</a>
+                    <p class="link-snippet">${result.snippet}</p>
+                </div>
+            `
+            })
+            showLoadMore(true)
+            
+        });
+        
+    </script>
+</body>
+</html>
