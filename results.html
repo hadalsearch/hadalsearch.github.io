@@ -147,7 +147,7 @@
 
     
 <div class="wrapper" align="center"> 
-    <form action="/results.html">
+    <form action="/GithubPage/hadalsearch.github.io/results.html">
     <a href="index.html" style="text-decoration: none; color:#F8F8F8">HADAL &nbsp| &nbsp</a>
     <input id="search-input" type="text" id="searchq" class="search-input" name="searchq" maxlength="1000" required autocomplete="off">        
     <input type="submit" style="color: #000000" value="Search">
@@ -234,41 +234,39 @@
                 showLoadCircle(false)
                 return
             }
+                        
+            
+            try {
+                const hadalResults = await searchRequest(searchQuery, filter, pageNumber)
+                console.log(hadalResults)
+                        
+                if (hadalResults.spellingAutoSuggest != null) {
+                    suggestedUrl = `/results.html?searchq=${encodeURIComponent(hadalResults.alterationOverride)}&filter=${filter}`
+                    $autoCorrect.innerHTML +=  `<p>Including results for: ${hadalResults.spellingSuggestHTML}</p>`
+                }
 
-            const hadalResults = await searchRequest(searchQuery, filter, pageNumber)
-            console.log(hadalResults)
+                showLoadCircle(false)
             
-            
-//            if (hadalResults.spellingSuggestion != null && 
-//               hadalResults.spellingAutoSuggest == null) {
-//                suggestedUrl = `/results.html?searchq=${hadalResults.spellingSuggestion}&filter=${filter}`
-//                
-//                $autoCorrect.innerHTML +=  `<p>Did you mean: <a href="${suggestedUrl}">${hadalResults.spellingSuggestion}</a></p>`
-//            }
-            
-            if (hadalResults.spellingAutoSuggest != null) {
-                suggestedUrl = `/results.html?searchq=${encodeURIComponent(hadalResults.alterationOverride)}&filter=${filter}`
-                $autoCorrect.innerHTML +=  `<p>Including results for: ${hadalResults.spellingSuggestHTML}</p>`
-                
-            }
-
-            
-            
-//            when you request next page, set this to true
-            showLoadCircle(false)
-            
-            hadalResults.results.forEach((result) => {
-            $results.innerHTML += `
+                hadalResults.results.forEach((result) => {
+                $results.innerHTML += `
                 <div class="result-container">
                     <a href="${result.url}" class="link-name">${result.name}</a>
                     <a class="link-url" href="${result.url}">${result.url}</a>
                     <p class="link-snippet">${result.snippet}</p>
                 </div>
-            `
-            })
+                `
+                })
+                showLoadMore(true)
+            }
             
-            showLoadMore(true)
-            
+            catch(err) {
+                $results.innerHTML = `
+                <div class="result-container">  
+                Sorry, we have run into an error: <b>${err.message}</b>. <br> Please try again later.</p>
+                </div>
+                `;
+                showLoadCircle(false)
+            }
             
             
             
