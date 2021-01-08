@@ -45,6 +45,20 @@
             word-wrap: break-word;
         }
 
+/*        Hidden Results*/
+        .hidden-result {
+            width: 65%;
+            border-style: solid;
+            border-width: thin;
+            border-color: rgba(255,255, 255,.3);
+            padding: 6px;
+            margin: 12px;
+            margin-left: auto;
+            margin-right: auto;
+            word-wrap: break-word;
+            opacity: .2;
+        }
+        
         
         .load-more {
             width: 65%;
@@ -175,9 +189,16 @@
     
     <div class="ad-container">
         <a href="baananas.com" class="link-name">Title of the Ad</a>
-        <a class="link-url" href="${result.url}">http://www.aadvertisement-website.com/whatever/this-might/be.html</a>
+        <a class="link-url" href="${result.url}"><b>Ad</b> - http://www.aadvertisement-website.com/whatever/this-might/be.html</a>
         <p class="link-snippet">This is where the text of the advertisement will go. I hope it isn't too annoying and doesn't deter you from usingn HADAL Search. </p>
     </div>
+    
+    <div class="hidden-result">
+        <a href="baananas.com" class="link-name">Result you don't want to see. </a>
+        <a class="link-url" href="${result.url}">http://www.bad-website.com/whatever/this-might/be.html</a>
+        <p class="link-snippet">This is where the snippet will go for sites you don't like. I hope it strikes the balance between visible and hidden. </p>
+    </div>
+
     
     <div id="results">
     </div>
