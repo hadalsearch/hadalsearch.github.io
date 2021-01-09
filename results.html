@@ -249,7 +249,7 @@
             let filter = params.get("filter")
             let searchQuery = params.get("searchq")
             console.log(searchQuery)
-                                    
+            
             if (filter === null) {
                 filter = "default"
             }
@@ -261,7 +261,8 @@
                 showLoadCircle(false)
                 return
             }
-                        
+            
+            document.title = searchQuery + " - HADAL Search"
             
             try {
                 const hadalResults = await searchRequest(searchQuery, filter, pageNumber)
