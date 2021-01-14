@@ -261,8 +261,20 @@
                 showLoadCircle(false)
                 return
             }
-            
+                
             document.title = searchQuery + " - HADAL Search"
+            
+            
+//            Testing Google bang!
+            if (searchQuery[0] == "!") { 
+                let passThroughQuery = searchQuery[2:]
+                
+                if (searchQuery[1] == "g") {
+                    window.location.replace(`google.com/search?q=a`)
+                }
+                
+                
+            }
             
             try {
                 const hadalResults = await searchRequest(searchQuery, filter, pageNumber)
