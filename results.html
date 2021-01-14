@@ -267,9 +267,9 @@
             
 //            Testing Google bang!
             if (searchQuery[0] == "!") { 
-                console.log("! Identified in query")
+                let passThroughQuery = searchQuery[2:]
+                
                 if (searchQuery[1] == "g") {
-                    let passThroughQuery = searchQuery[2:]
                     window.location.replace(`google.com/search?q=a`)
                 }
                 
