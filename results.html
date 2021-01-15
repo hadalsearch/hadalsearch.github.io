@@ -289,7 +289,7 @@
                 if (searchQuery.substring(1,4) == "arx" && searchQuery[4] == " ") {
                     let redirectQuery = searchQuery.substring(5)
                     console.log(redirectQuery);
-                    window.location.replace( `https://arxiv.org/search/?query=${redirectQuery}`);
+                    window.location.replace( `https://arxiv.org/search/?query=${redirectQuery}&searchtype=all&abstracts=show&order=-announced_date_first&size=50`);
                 }
                 if (searchQuery.substring(1,3) == "so" && searchQuery[3] == " ") {
                     let redirectQuery = searchQuery.substring(4)
