@@ -295,7 +295,13 @@
                     let redirectQuery = searchQuery.substring(4)
                     console.log(redirectQuery);
                     window.location.replace( `https://stackoverflow.com/search?q=${redirectQuery}`);
+                }    
+                if (searchQuery.substring(1,3) == "wa" && searchQuery[3] == " ") {
+                    let redirectQuery = searchQuery.substring(4)
+                    console.log(redirectQuery);
+                    window.location.replace( `https://www.wolframalpha.com/input/?i=${redirectQuery}`);
                 }                
+
                             
             }
 
