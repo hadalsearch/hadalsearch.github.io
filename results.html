@@ -170,7 +170,7 @@
 <!--Offline Testing    -->
 <!--    <form action="/GithubPage/hadalsearch.github.io/results.html">-->
 <!--Online Deployment    -->
-    <form action="/GithubPage/hadalsearch.github.io/results.html">
+    <form action="/results.html">
     
     <a href="index.html" style="text-decoration: none; color:#F8F8F8">HADAL &nbsp| &nbsp</a>
     <input id="search-input" type="text" id="searchq" class="search-input" name="searchq" maxlength="1000" required autocomplete="off">        
@@ -264,6 +264,7 @@
                 filter = "default"
             }
             
+//            Bang Logic
             if (searchQuery[0] == "!") {
                 console.log("Bang Time");
                 let redirectURL = await bangRequest(searchQuery)
