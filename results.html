@@ -32,6 +32,7 @@
             word-wrap: break-word;
         }
         
+        
         .ad-container {
             width: 65%;
             border-style: solid;
@@ -60,6 +61,35 @@
         }
         
         
+/*        Multiple Results*/
+        .multiple-result {
+            width: 65%;
+            border-style: solid;
+            border-width: thin;
+            border-color: rgba(255,255, 255,.3);
+            padding: 6px;
+            margin: 12px;
+            margin-left: auto;
+            margin-right: auto;
+            word-wrap: break-word;
+        }
+        .sub-result {
+            width: 95%;
+            border-style: dotted;
+            border-width: thin;
+            border-color: rgba(255,255, 255,0);
+            padding: 5px;
+            margin: 0px;
+            margin-left: auto;
+            margin-right: 0;
+            word-wrap: break-word;
+            opacity: 1;
+        }
+        .sub-link-snippet {
+            font-size: 14px;
+            margin-top: 0px;
+        }
+
         .load-more {
             width: 65%;
             padding: 6px;
@@ -191,18 +221,44 @@
     <div id="search-suggestion"></div>
     
     
+    
+<!--Add Template
     <div class="ad-container">
         <a href="baananas.com" class="link-name">Title of the Ad</a>
         <a class="link-url" href="${result.url}"><b>Ad</b> - http://www.aadvertisement-website.com/whatever/this-might/be.html</a>
         <p class="link-snippet">This is where the text of the advertisement will go. I hope it isn't too annoying and doesn't deter you from usingn HADAL Search. </p>
     </div>
+-->
     
+<!--Hidden Result Template
     <div class="hidden-result">
         <a href="baananas.com" class="link-name">Result you don't want to see. </a>
         <a class="link-url" href="${result.url}">http://www.bad-website.com/whatever/this-might/be.html</a>
         <p class="link-snippet">This is where the snippet will go for sites you don't like. I hope it strikes the balance between visible and hidden. </p>
     </div>
+-->
 
+    
+    
+    
+<!--Multiple Result Template
+    <div class="multiple-result">
+        <a href="baananas.com" class="link-name">First result from this URL. </a>
+        <a class="link-url" href="${result.url}">http://www.wewbsite-big.com/whatever/this-might/be.html</a>
+        <p class="link-snippet">This is where the snippet will go for the first result. More information here about what the site is about. </p>
+            <div class="sub-result">
+            <a href="baananas.com" class="link-name">The next page from the website that would show up. </a>
+            <p class="sub-link-snippet">This is where the snippet will go for the subsequent results. More information here about what the site is about.</p>
+            </div>
+            <div class="sub-result">
+            <a href="baananas.com" class="link-name">Number 3: The third page from the website would be displayed here. </a>
+            <p class="sub-link-snippet">This is where the snippet will go for the subsequent results. More information here about what the site is about.</p>
+            </div>
+    </div>
+-->
+
+    
+    
     
     <div id="results">
     </div>
