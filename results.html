@@ -74,10 +74,7 @@
             word-wrap: break-word;
         }
         .sub-result {
-            width: 95%;
-            border-style: dotted;
-            border-width: thin;
-            border-color: rgba(255,255, 255,0);
+            width: 96%;
             padding: 5px;
             margin: 0px;
             margin-left: auto;
@@ -111,6 +108,10 @@
         .link-name {
             font-size: 18px;
         }
+        .sub-link-name {
+            font-size: 14px;
+        }
+
         .link-url {
             color: #70dbbf;
             font-size: 12px;
@@ -237,9 +238,6 @@
         <p class="link-snippet">This is where the snippet will go for sites you don't like. I hope it strikes the balance between visible and hidden. </p>
     </div>
 -->
-
-    
-    
     
 <!--Multiple Result Template
     <div class="multiple-result">
@@ -353,18 +351,44 @@
 
                 showLoadCircle(false)
             
+                
                 hadalResults.results.forEach((result) => {
-                $results.innerHTML += `
-                <div class="result-container">
-                    <a href="${result.url}" class="link-name">${result.name}</a>
-                    <a class="link-url" href="${result.url}">${result.url}</a>
-                    <p class="link-snippet">${result.snippet}</p>
-                </div>
-                `
+                    
+//                One result from baseURL
+                    if (result.length == 1){
+                        $results.innerHTML += `
+                        <div class="result-container">
+                            <a href="${result[0].url}" class="link-name">${result[0].name}</a>
+                            <a class="link-url" href="${result[0].url}">${result[0].url}</a>
+                            <p class="link-snippet">${result[0].snippet}</p>
+                        </div>
+                        `
+                    }
+                
+//                Multiple results from baseURL
+                    else {
+                        new_string = ""
+                        new_string += `
+                            <div class="multiple-result">
+                            <a href="${result[0].url}" class="link-name">${result[0].name}</a>
+                            <a class="link-url" href="${result[0].url}">${result[0].url}</a>
+                            <p class="link-snippet">${result[0].snippet}</p>
+                        `
+                        for (i=1; i<result.length; i++){
+                            new_string += `
+                            <div class="sub-result">
+                            <a href="${result[i].url}" class="sub-link-name">${result[i].name}</a>
+                            <p class="sub-link-snippet">${result[i].snippet}</p>
+                            </div>
+                            `
+                        }
+                        new_string += `</div>`
+                        $results.innerHTML += new_string
+                    }
+          
                 })
-                showLoadMore(true)
+                showLoadMore(true)            
             }
-            
             catch(err) {
                 $results.innerHTML = `
                 <div class="result-container">  
@@ -372,12 +396,7 @@
                 </div>
                 `;
                 showLoadCircle(false)
-            }
-            
-            
-            
-
-            
+            };
         });
         
         
@@ -412,18 +431,50 @@
             showLoadCircle(false)
             
             hadalResults.results.forEach((result) => {
-            $results.innerHTML += `
-                <div class="result-container">
-                    <a href="${result.url}" class="link-name">${result.name}</a>
-                    <a class="link-url" href="${result.url}">${result.url}</a>
-                    <p class="link-snippet">${result.snippet}</p>
-                </div>
-            `
-            })
+                
+//                One result from baseURL
+                if (result.length == 1){
+                    $results.innerHTML += `
+                    <div class="result-container">
+                        <a href="${result[0].url}" class="link-name">${result[0].name}</a>
+                        <a class="link-url" href="${result[0].url}">${result[0].url}</a>
+                        <p class="link-snippet">${result[0].snippet}</p>
+                    </div>
+                    `
+                }
+                
+//                Multiple results from baseURL
+                else {
+                    new_string = ""
+                    new_string += `
+                        <div class="multiple-result">
+                        <a href="${result[0].url}" class="link-name">${result[0].name}</a>
+                        <a class="link-url" href="${result[0].url}">${result[0].url}</a>
+                        <p class="link-snippet">${result[0].snippet}</p>
+                    `
+                    for (i=1; i<result.length; i++){
+                        new_string += `
+                        <div class="sub-result">
+                        <a href="${result[i].url}" class="sub-link-name">${result[i].name}</a>
+                        <p class="sub-link-snippet">${result[i].snippet}</p>
+                        </div>
+                        `
+                    }
+                    new_string += `</div>`
+                    $results.innerHTML += new_string
+
+          
+            }
             showLoadMore(true)
             
         });
+        })
+                                                                   
+                                                                
         
+
+
+
     </script>
 </body>
 </html>
