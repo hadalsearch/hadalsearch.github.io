@@ -377,6 +377,7 @@
                         for (i=1; i<result.length; i++){
                             new_string += `
                             <div class="sub-result">
+                            <a class="link-url" href="${result[0].url}">${result[0].url}</a>
                             <a href="${result[i].url}" class="sub-link-name">${result[i].name}</a>
                             <p class="sub-link-snippet">${result[i].snippet}</p>
                             </div>
@@ -455,6 +456,7 @@
                     for (i=1; i<result.length; i++){
                         new_string += `
                         <div class="sub-result">
+                        <a class="link-url" href="${result[0].url}">${result[0].url}</a>
                         <a href="${result[i].url}" class="sub-link-name">${result[i].name}</a>
                         <p class="sub-link-snippet">${result[i].snippet}</p>
                         </div>
