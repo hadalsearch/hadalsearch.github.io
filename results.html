@@ -85,6 +85,10 @@
         .sub-link-snippet {
             font-size: 14px;
             margin-top: 0px;
+            margin-right: 20px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow:hidden;
         }
 
         .load-more {
@@ -132,6 +136,35 @@
             color: #9A90B8;
         }
         
+/*        Stonk*/
+        .stonk-container {
+            width: 85%;
+            padding: 6px;
+            margin: 12px;
+            margin-left: auto;
+            margin-right: auto;
+            word-wrap: break-word;
+        }
+        .company-profile {
+            width: 50%;
+            padding: 6px;
+            margin: 12px;
+            margin-left: 0;
+            margin-right: auto;
+            word-wrap: break-word;
+        }
+        .company-fundementals {
+            width: 50%;
+            padding: 6px;
+            margin: 12px;
+            margin-left: auto;
+            margin-right: 0;
+            word-wrap: break-word;
+        }
+
+        
+
+/*        Loading*/
         .lds-circle {
             display: flex;
             justify-content: center;
@@ -238,24 +271,14 @@
         <p class="link-snippet">This is where the snippet will go for sites you don't like. I hope it strikes the balance between visible and hidden. </p>
     </div>
 -->
-    
-<!--Multiple Result Template
-    <div class="multiple-result">
-        <a href="baananas.com" class="link-name">First result from this URL. </a>
-        <a class="link-url" href="${result.url}">http://www.wewbsite-big.com/whatever/this-might/be.html</a>
-        <p class="link-snippet">This is where the snippet will go for the first result. More information here about what the site is about. </p>
-            <div class="sub-result">
-            <a href="baananas.com" class="link-name">The next page from the website that would show up. </a>
-            <p class="sub-link-snippet">This is where the snippet will go for the subsequent results. More information here about what the site is about.</p>
-            </div>
-            <div class="sub-result">
-            <a href="baananas.com" class="link-name">Number 3: The third page from the website would be displayed here. </a>
-            <p class="sub-link-snippet">This is where the snippet will go for the subsequent results. More information here about what the site is about.</p>
-            </div>
-    </div>
--->
 
     
+    <div id="stonk">
+        <div id="company-profile">
+        </div>
+        <div id="company-fundementals">
+        </div>
+    </div>
     
     
     <div id="results">
@@ -273,7 +296,8 @@
         
         const $results = document.getElementById('results')
         const $autoCorrect = document.getElementById('search-suggestion')
-        
+        const $stonk = document.getElementById('stonk')
+
         const $loadCircle = document.getElementById("load-circle")
         const $loadMore = document.getElementById("loadMore")
         const $textInput = document.getElementById("search-input")
@@ -330,6 +354,15 @@
                             
             }
 
+            
+//            STONK SECTION?????
+            if (searchQuery[0] == "$") {
+                console.log("Stonk")
+                $stonk.innerHTML += ``
+            
+            }
+            
+            
             document.getElementById(filter+'-filter').checked = true;
             $textInput.value = searchQuery
             
