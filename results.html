@@ -273,10 +273,13 @@
 -->
 
     
-    <div id="stonk">
-        <div id="company-profile">
+    <div id="stonk" class="stonk">
+    </div>
+    
+    <div id="stonk-details" class="stonk-details">
+        <div id="company-profile" class="company-profile">
         </div>
-        <div id="company-fundementals">
+        <div id="company-fundementals" class="company-fundementals">
         </div>
     </div>
     
@@ -314,13 +317,17 @@
         
         
         async function searchRequest(searchQuery, filter, pageNumber) {
-            const response = await fetch(`http://127.0.0.1:5000/searchRequest?searchq=${searchQuery}&filter=${filter}&pagenum=${pageNumber}`)
+            
+            console.log("Before Fetch")
+            const response = await fetch(`https://server-mby3.onrender.com/searchRequest?searchq=${searchQuery}&filter=${filter}&pagenum=${pageNumber}`)
+            console.log("After Fetch")
+            
             const json = await response.json()
             return json
         }
         
         async function bangRequest(searchQuery) {
-            const response = await fetch(`http://127.0.0.1:5000/bangRedirect?searchq=${searchQuery}`)
+            const response = await fetch(`https://server-mby3.onrender.com/bangRedirect?searchq=${searchQuery}`)
             const json = await response.json()
             return json
         }
@@ -357,8 +364,9 @@
             
 //            STONK SECTION?????
             if (searchQuery[0] == "$") {
-                console.log("Stonk")
-                $stonk.innerHTML += ``
+                console.log("stonk")
+                    $stonk.innerHTML += ``
+    
             
             }
             
@@ -372,6 +380,9 @@
             }
             
             document.title = searchQuery + " - HADAL Search"
+            
+            
+            
             
             try {
                 const hadalResults = await searchRequest(searchQuery, filter, pageNumber)
