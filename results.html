@@ -406,17 +406,6 @@
             document.title = searchQuery + " - HADAL Search"
             
             
-            if(navigator.userAgent.toLowerCase().match(/mobile/i)) {
-//                asdfXXXXXXXXXX
-                var specificDiv = document.getElementById("result-container");
-                specificDiv.style.width = "90%";
-                specificDiv = document.getElementById("ad-container");
-                specificDiv.style.width = "90%";
-                specificDiv = document.getElementById("hidden-result");
-                specificDiv.style.width = "90%";
-                specificDiv = document.getElementById("multiple-result");
-                specificDiv.style.width = "90%";
-            }
             
             try {
                 const hadalResults = await searchRequest(searchQuery, filter, pageNumber)
@@ -466,7 +455,19 @@
                     }
           
                 })
-                showLoadMore(true)            
+                showLoadMore(true)
+                if(navigator.userAgent.toLowerCase().match(/mobile/i)) {
+//                asdfXXXXXXXXXX
+                var specificDiv = document.getElementById("result-container");
+                specificDiv.style.width = "90%";
+                specificDiv = document.getElementById("ad-container");
+                specificDiv.style.width = "90%";
+                specificDiv = document.getElementById("hidden-result");
+                specificDiv.style.width = "90%";
+                specificDiv = document.getElementById("multiple-result");
+                specificDiv.style.width = "90%";
+            }
+
             }
             catch(err) {
                 $results.innerHTML = `
