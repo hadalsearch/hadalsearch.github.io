@@ -459,13 +459,20 @@
                 if(navigator.userAgent.toLowerCase().match(/mobile/i)) {
 //                asdfXXXXXXXXXX
                 var specificDiv = document.getElementById("result-container");
-                specificDiv.style.width = "90%";
+                if (specificDiv not null) {
+                    specificDiv.style.width = "90%";
+                }
                 specificDiv = document.getElementById("ad-container");
-                specificDiv.style.width = "90%";
-                specificDiv = document.getElementById("hidden-result");
-                specificDiv.style.width = "90%";
+                if (specificDiv not null) {
+                    specificDiv.style.width = "90%";
+                }                specificDiv = document.getElementById("hidden-result");
+                if (specificDiv not null) {
+                    specificDiv.style.width = "90%";
+                }
                 specificDiv = document.getElementById("multiple-result");
-                specificDiv.style.width = "90%";
+                if (specificDiv not null) {
+                    specificDiv.style.width = "90%";
+                }
             }
 
             }
