@@ -326,7 +326,7 @@
         const $results = document.getElementById('results')
         const $autoCorrect = document.getElementById('search-suggestion')
         const $stonk = document.getElementById('stonk')
-
+        
         const $loadCircle = document.getElementById("load-circle")
         const $loadMore = document.getElementById("loadMore")
         const $textInput = document.getElementById("search-input")
@@ -406,7 +406,17 @@
             document.title = searchQuery + " - HADAL Search"
             
             
-            
+            if(navigator.userAgent.toLowerCase().match(/mobile/i)) {
+//                asdfXXXXXXXXXX
+                var specificDiv = document.getElementById("result-container");
+                specificDiv.style.width = "90%";
+                var specificDiv = document.getElementById("ad-container");
+                specificDiv.style.width = "90%";
+                var specificDiv = document.getElementById("hidden-result");
+                specificDiv.style.width = "90%";
+                var specificDiv = document.getElementById("multiple-result");
+                specificDiv.style.width = "90%";
+            }
             
             try {
                 const hadalResults = await searchRequest(searchQuery, filter, pageNumber)
