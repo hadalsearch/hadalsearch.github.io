@@ -440,8 +440,9 @@
 
                 showLoadCircle(false)
             
-                
+                let resultCounter = 0;
                 hadalResults.results.forEach((result) => {
+                    resultCounter += 1
                     
 //                One result from baseURL
                     if (result.length == 1){
@@ -454,6 +455,7 @@
                         `
                     }
                 
+//                2-3 results from baseURL
                     else {
                         new_string = ""
                         new_string += `
