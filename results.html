@@ -267,6 +267,13 @@
           transform: rotate(45deg);
           -webkit-transform: rotate(45deg);
         }
+        
+        .form .ResetButton {
+            position: absolute;
+            top: 0;
+            margin-right: 50;
+            padding-right: 50px;
+        }
 
     </style>
     
@@ -282,7 +289,11 @@
     <form action="/results.html">
     
     <a href="index.html" style="text-decoration: none; color:#F8F8F8">HADAL &nbsp| &nbsp</a>
-    <input id="search-input" type="text" id="searchq" class="search-input" name="searchq" maxlength="1000" required autocomplete="on">        
+    <input id="search-input" type="text" id="searchq" class="search-input" name="searchq" maxlength="1000" required autocomplete="on">
+        
+<!--    Reset button - needs work. todo: put inside form and only clear search entry-->
+<!--    <input class="ResetButton" type="reset" value="X" style="color: #999999">-->
+        
     <input type="submit" style="color: #000000" value="Search">
     <a href="about.html" style="text-decoration: none; color:#F8F8F8">&nbsp |&nbsp About</a> 
     <p> 
