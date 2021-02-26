@@ -274,6 +274,14 @@
             margin-right: 50;
             padding-right: 50px;
         }
+        
+        .searchTime {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding-right: 50px;
+            font-size: 14px;
+        }
 
     </style>
     
@@ -293,7 +301,7 @@
         
 <!--    Reset button - needs work. todo: put inside form and only clear search entry-->
 <!--    <input class="ResetButton" type="reset" value="X" style="color: #999999">-->
-        
+    
     <input type="submit" style="color: #000000" value="Search">
     <a href="about.html" style="text-decoration: none; color:#F8F8F8">&nbsp |&nbsp About</a> 
     <p> 
@@ -305,6 +313,8 @@
 
     </p>
     </form>
+    <p class="searchTime" id="searchTimeBox"></p>
+    
 </div>    
     
 <!--    Use this with CSS/JS below  to show suggested search-->
@@ -363,6 +373,7 @@
         const $loadCircle = document.getElementById("load-circle")
         const $loadMore = document.getElementById("loadMore")
         const $textInput = document.getElementById("search-input")
+        const $loadTimeBox = document.getElementById("searchTimeBox")
         
         let pageNumber = 0
         
@@ -450,7 +461,7 @@
                 }
 
                 showLoadCircle(false)
-            
+                            
                 let resultCounter = 0;
                 hadalResults.results.forEach((result) => {
                     resultCounter += 1
@@ -466,8 +477,8 @@
                         `
                     }
                 
-//                2-3 results from baseURL
-                    else {
+//                Multiple results from baseURL
+                    else {         
                         new_string = ""
                         new_string += `
                             <div class="multiple-result">
@@ -491,6 +502,10 @@
           
                 })
                 showLoadMore(true)
+                
+                
+                
+                $loadTimeBox.innerHTML += `${Number(Math.round(hadalResults.time+'e2')+'e-2')} seconds`
 
             }
             catch(err) {
