@@ -453,8 +453,21 @@
             
             try {
                 const hadalResults = await searchRequest(searchQuery, filter, pageNumber)
-                console.log(hadalResults)
-                        
+                console.log(hadalResults.length)
+                
+                
+//                No results
+                if (hadalResults.length == 1) {
+                    $results.innerHTML = `
+                <div class="result-container"> No results found for: <i>${searchQuery}</i>.</p>
+                </div>
+                `;
+                showLoadCircle(false)
+                    return;
+                }
+                  
+                
+                
                 if (hadalResults.spellingAutoSuggest != null) {
                     suggestedUrl = `/results.html?searchq=${encodeURIComponent(hadalResults.alterationOverride)}&filter=${filter}`
                     $autoCorrect.innerHTML +=  `<p>Including results for: ${hadalResults.spellingSuggestHTML}</p>`
