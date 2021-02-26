@@ -104,6 +104,18 @@
             opacity: 1;
         }
         
+        .extra-sub-result {
+            width: 96%;
+            padding: 0px;
+            margin: 0px;
+            margin-left: auto;
+            margin-right: 0;
+            word-wrap: break-word;
+            opacity: 1;
+            display:none;
+        }
+
+        
         .sub-link-snippet {
             font-size: 14px;
             margin-top: 0px;
@@ -114,6 +126,17 @@
         }
 
         .load-more {
+            width: 65%;
+            padding: 6px;
+            margin: 12px;
+            margin-left: auto;
+            margin-right: auto;
+            word-wrap: break-word;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .show-more {
             width: 65%;
             padding: 6px;
             margin: 12px;
@@ -431,7 +454,6 @@
                         `
                     }
                 
-//                Multiple results from baseURL
                     else {
                         new_string = ""
                         new_string += `
@@ -452,27 +474,10 @@
                         new_string += `</div>`
                         $results.innerHTML += new_string
                     }
+
           
                 })
                 showLoadMore(true)
-//                if(navigator.userAgent.toLowerCase().match(/mobile/i)) {
-////                asdfXXXXXXXXXX
-//                var specificDiv = document.getElementById("result-container");
-//                if (specificDiv not null) {
-//                    specificDiv.style.width = "90%";
-//                }
-//                specificDiv = document.getElementById("ad-container");
-//                if (specificDiv not null) {
-//                    specificDiv.style.width = "90%";
-//                }                specificDiv = document.getElementById("hidden-result");
-//                if (specificDiv not null) {
-//                    specificDiv.style.width = "90%";
-//                }
-//                specificDiv = document.getElementById("multiple-result");
-//                if (specificDiv not null) {
-//                    specificDiv.style.width = "90%";
-//                }
-//            }
 
             }
             catch(err) {
@@ -486,6 +491,12 @@
         });
         
         
+        
+        
+
+                                                   
+                                                                       
+                                                                       
 //        JS Event on "Show More"
         document.getElementById("loadMoreButton").addEventListener('click', async (event) => {
             showLoadCircle(true)
