@@ -387,7 +387,7 @@
         
         
         async function searchRequest(searchQuery, filter, pageNumber) {
-            
+            console.log(searchQuery)
             const response = await fetch(`https://server-mby3.onrender.com/searchRequest?searchq=${searchQuery}&filter=${filter}&pagenum=${pageNumber}`)
             
             const json = await response.json()
